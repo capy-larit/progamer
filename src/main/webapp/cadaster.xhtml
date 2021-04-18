@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="content">
+	<!-- EXIBE MENSAGEM DE ERRO PARA O USUÁRIO -->
+	<p:messages id="messages" ><p:autoUpdate/></p:messages>
+		<h:form>
+			<p:card class="form-card">
+				<f:facet name="title"> Cadaster </f:facet>
+				<div class="ui-fluid">
+				    <div class="p-field">
+				        <label for="name">Name</label>
+				        <p:inputText id="name" type="text" value="#{cadasterBean.cadaster.name}" required="true">
+				        	<f:ajax event="blur" render="messages" />
+				        </p:inputText>
+				    </div>
+				    
+				    <div class="p-field p-col-12 p-md-4">
+		                <p:outputLabel for="navigator" value="Birthdate"/>
+		                <p:datePicker id="navigator" value="#{cadasterBean.cadaster.birthdate}" monthNavigator="true" yearNavigator="true" showWeek="true" required="true">
+		                	<f:ajax event="blur" render="messages" />
+		                </p:datePicker>
+		            </div>
+				 
+				    <div class="p-field">
+				        <label for="email">E-mail</label>
+				        <p:inputText id="email" type="email" value="#{cadasterBean.cadaster.email}" required="true" 
+				        placeholder="google@google.com" requiredMessage="Please enter your email address." validatorMessage="Invalid email format"> 
+				        	<f:ajax event="blur" render="messages" />
+				        	<f:validateRegex
+    							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				        </p:inputText>
+				    </div>
+            				    
+				    <div class="p-field">
+				        <label for="password">Password</label>
+				         <p:password id="feedback" value="#{cadasterBean.cadaster.password}" feedback="true" required="true"> 
+				         	<f:ajax event="blur" render="messages" />
+				         </p:password>				    
+				    </div>
+				</div>
+				<f:facet name="footer">
+					<p:commandButton icon="pi pi-check" value="Save" action="#{cadasterBean.save}">
+						<f:ajax render="messages" execute="@form" />
+					</p:commandButton>
+					<p:commandButton icon="pi pi-times" value="Cancel" type="reset"
+						styleClass="ui-button-secondary" style="margin-left: .5em"/>
+					</f:facet>
+			</p:card>
+		</h:form>
+		<div class="card">
+		    <h:form id="form">
+		        <p:dataTable id="cadasters" var="cadaster" value="#{cadasterBean.cadasters}" >
+		            <f:facet name="header">
+		                Cadaster List
+		            </f:facet>
+		
+		           
+		            <p:column headerText="Name">
+		                <h:outputText value="#{cadaster.name}" />
+		            </p:column>
+		             <p:column headerText="Birthdate">
+		                <h:outputText value="#{cadaster.birthdate}" />
+		            </p:column>
+		            <p:column headerText="E-mail">
+		                <h:outputText value="#{cadaster.email}" />
+		            </p:column>
+		            <p:column headerText="Password">
+		                <h:outputText value="#{cadaster.password}" />
+		            </p:column>
+		          
+		        </p:dataTable>
+		   </h:form>
+        </div>
+		
+	</ui:define>
+</ui:composition>
+</html>
