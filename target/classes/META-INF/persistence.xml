@@ -4,7 +4,7 @@
     <description>Forge Persistence Unit</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>br.com.fiap.model.Setup</class>
-    <class>br.com.fiap.model.Cadaster</class>
+    <class>br.com.fiap.model.User</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
    	  <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
@@ -13,7 +13,7 @@
       <property name="javax.persistence.jdbc.password" value="WLZRTA67" />
     
       <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.transaction.flush_before_completion" value="true"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
